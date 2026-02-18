@@ -9,6 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- File Picker CSS -->
+    <link rel="stylesheet" href="{{ url('public/css/filepicker.css') }}">
 </head>
 
 <body class="bg-white text-slate-900 antialiased font-['Inter']">
@@ -48,6 +50,10 @@
             <p class="text-slate-400 text-sm">&copy; {{ date('Y') }} {{ $site_title }}. Tüm hakları saklıdır.</p>
         </div>
     </footer>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ url('public/js/filepicker.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

@@ -1,11 +1,10 @@
 <?php
 
 use Core\Router;
-use Core\Response;
+use App\Controllers\Api\FileLibraryController;
 
-Router::get('/api/users', function() {
-    Response::json([
-        ['id' => 1, 'name' => 'John Doe'],
-        ['id' => 2, 'name' => 'Jane Doe']
-    ]);
-});
+// File Library Routes
+Router::get('/api/library', [FileLibraryController::class, 'index']);
+Router::post('/api/upload', [FileLibraryController::class, 'upload']);
+Router::post('/api/delete', [FileLibraryController::class, 'delete']);
+Router::delete('/api/delete', [FileLibraryController::class, 'delete']);
