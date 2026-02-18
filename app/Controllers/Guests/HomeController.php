@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         $this->view('guests.home', [
-            'name' => 'Antigravity User!',
+            'name' => 'Anasayfa',
             'items' => ['PHP', 'MVC', 'Blade', 'Logic']
         ]);
     }
