@@ -5,8 +5,8 @@ namespace App\Controllers\Api;
 use Core\Controller;
 use Core\Request;
 use Core\Response;
-use Core\DB;
 use Core\Upload;
+use App\Models\File;
 
 class FileLibraryController extends Controller
 {
@@ -16,7 +16,7 @@ class FileLibraryController extends Controller
     public function index()
     {
         $search = Request::get('search');
-        $query = DB::table('files')->orderBy('id', 'DESC');
+        $query = File::orderBy('id', 'DESC');
 
         if ($search) {
             $query->where('name', 'LIKE', "%$search%");
@@ -63,7 +63,7 @@ class FileLibraryController extends Controller
 
         foreach ($uploadedFiles as $file) {
             // Save to database
-            DB::table('files')->insert([
+            File::create([
                 'name' => $file['name'],
                 'path' => $file['path'],
                 'url' => $file['url'],
@@ -76,7 +76,7 @@ class FileLibraryController extends Controller
 
         return Response::json([
             'success' => true,
-            'data' => (isset($_FILES['files']['name'])) ? $results : $results[0]
+            'data' => $results
         ]);
     }
 
@@ -91,7 +91,7 @@ class FileLibraryController extends Controller
             return Response::json(['success' => false, 'message' => 'Geçersiz ID.'], 400);
         }
 
-        $file = DB::table('files')->where('id', $id)->first();
+        $file = File::where('id', $id)->first();
 
         if (!$file) {
             return Response::json(['success' => false, 'message' => 'Dosya bulunamadı.'], 404);
@@ -104,7 +104,7 @@ class FileLibraryController extends Controller
         }
 
         // Delete from database
-        DB::table('files')->where('id', $id)->delete();
+        File::where('id', $id)->delete();
 
         return Response::json(['success' => true]);
     }

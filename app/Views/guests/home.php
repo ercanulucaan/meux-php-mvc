@@ -153,7 +153,7 @@
                     </div>
                 </div>
 
-                <button id="file-picker"
+                <button id="file-picker-demo"
                     class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg shadow-slate-200 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center space-x-3">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -170,7 +170,7 @@
 <script>
     $(document).ready(function () {
         // Gelişmiş File Picker Başlatma
-        $('#file-picker').filePicker({
+        $('#file-picker, #file-picker-demo').filePicker({
             title: 'Medya Seçici',
             apiUrl: '{{ url("api/library") }}',
             uploadUrl: '{{ url("api/upload") }}',

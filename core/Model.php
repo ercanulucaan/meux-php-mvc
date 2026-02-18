@@ -29,6 +29,16 @@ abstract class Model
         return static::query()->where($column, $operator, $value);
     }
 
+    public static function orderBy($column, $direction)
+    {
+        return static::query()->orderBy($column, $direction);
+    }
+
+    public static function paginate($perPage)
+    {
+        return static::query()->paginate($perPage);
+    }
+
     public static function create($data)
     {
         // Sadece fillable olanları kabul et
