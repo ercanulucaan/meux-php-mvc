@@ -1,6 +1,6 @@
 @extends('guests.layouts.app')
 
-@section('title')Anasayfa@endsection
+@section('title', 'Anasayfa')
 
 <!-- Hero Section -->
 <div class="relative bg-white overflow-hidden">
