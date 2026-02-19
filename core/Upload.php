@@ -23,6 +23,11 @@ class Upload
         static::$options = array_merge(static::$options, $opts);
     }
 
+    public static function isMultiple($inputName)
+    {
+        return isset($_FILES[$inputName]) && is_array($_FILES[$inputName]['name']);
+    }
+
     /**
      * Handle single file upload
      */

@@ -47,7 +47,7 @@ class FileLibraryController extends Controller
 
         $results = [];
 
-        if (isset($_FILES['files']['name'])) {
+        if (Upload::isMultiple('files')) {
             $uploadedFiles = Upload::multiple('files');
         } else {
             $uploaded = Upload::single('file');

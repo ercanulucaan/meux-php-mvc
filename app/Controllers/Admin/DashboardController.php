@@ -10,8 +10,7 @@ class DashboardController extends Controller
     public function index()
     {
         $stats = [
-            'users_count' => User::count(),
-            // Diğer istatistikler buraya...
+            'users_count' => User::count()
         ];
 
         return $this->view('admin.dashboard', compact('stats'));
