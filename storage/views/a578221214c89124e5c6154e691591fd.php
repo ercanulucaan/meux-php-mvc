@@ -9,8 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- File Picker CSS -->
-    <link rel="stylesheet" href="<?php echo e(url('public/css/filepicker.css') ?? ""); ?>">
 </head>
 
 <body class="bg-white text-slate-900 antialiased font-['Inter']">

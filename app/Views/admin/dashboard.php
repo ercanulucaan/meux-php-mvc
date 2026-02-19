@@ -70,6 +70,21 @@
         </div>
     </div>
 
+    <div class="mt-3 sm:mt-0 sm:ml-3">
+        <div class="flex flex-col sm:flex-row gap-4">
+            <button id="file-picker"
+                class="flex items-center justify-center gap-2 px-6 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-semibold transition-all shadow-lg hover:shadow-indigo-200 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">🖼️</span>
+                Dosya Seç (Tekil)
+            </button>
+            <button id="file-picker-multi"
+                class="flex items-center justify-center gap-2 px-6 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-semibold transition-all shadow-lg hover:shadow-slate-200 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📂</span>
+                Dosya Seç (Çoğul)
+            </button>
+        </div>
+    </div>
+
     <!-- Quick Actions / Table Section Example -->
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
         <div class="p-6 border-b border-slate-50 flex items-center justify-between">
@@ -107,3 +122,35 @@
         </div>
     </div>
 </div>
+
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        // Gelişmiş File Picker Başlatma
+        $('#file-picker, #file-picker-demo').filePicker({
+            title: 'Medya Seçici',
+            apiUrl: '{{ url("api/library") }}',
+            uploadUrl: '{{ url("api/upload") }}',
+            deleteUrl: '{{ url("api/delete") }}',
+            inputTarget: '#selected-file-path',
+            previewTarget: '#selected-preview',
+            onSelect: function (url) {
+                console.log('Seçilen Dosya:', url);
+            }
+        });
+
+        $('#file-picker-multi').filePicker({
+            title: 'Çoklu Medya Seçici',
+            apiUrl: '{{ url("api/library") }}',
+            uploadUrl: '{{ url("api/upload") }}',
+            deleteUrl: '{{ url("api/delete") }}',
+            multiple: true,
+            onSelect: function (urls) {
+                console.log('Seçilen Dosyalar:', urls);
+                alert(urls.length + ' dosya seçildi:\n' + urls.join('\n'));
+            }
+        });
+    });
+</script>
+@endsection

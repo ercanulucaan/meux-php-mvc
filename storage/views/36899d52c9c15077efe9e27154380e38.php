@@ -9,6 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- File Picker CSS -->
+    <link rel="stylesheet" href="<?php echo e(url('public/css/filepicker.css') ?? ""); ?>">
+    @yields('styles')
 </head>
 
 <body class="bg-slate-50 text-slate-900 antialiased font-['Inter']">
@@ -94,6 +97,10 @@
             </main>
         </div>
     </div>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="<?php echo e(url('public/js/filepicker.js') ?? ""); ?>"></script>
+    <?php echo \Core\View::yieldSection('scripts'); ?>
 </body>
 
 </html>
