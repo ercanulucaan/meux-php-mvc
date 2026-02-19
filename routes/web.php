@@ -12,6 +12,7 @@ use App\Middlewares\Auth;
 
 // Admin Controllers
 use App\Controllers\Admin\DashboardController;
+use App\Controllers\Admin\UserController;
 
 
 // Guests Routes
@@ -32,4 +33,12 @@ Router::group(['prefix' => 'auth'], function () {
 // Admin Routes
 Router::group(['prefix' => 'admin', 'middleware' => [Auth::class]], function () {
     Router::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    // Users
+    Router::get('/users', [UserController::class, 'index'])->name('admin.users');
+    Router::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Router::post('/users', [UserController::class, 'store'])->name('admin.users.store');
+    Router::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Router::post('/users/{id}/update', [UserController::class, 'update'])->name('admin.users.update');
+    Router::post('/users/{id}/delete', [UserController::class, 'delete'])->name('admin.users.delete');
 });

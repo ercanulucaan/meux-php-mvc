@@ -78,10 +78,10 @@ class View
         $code = preg_replace('/\{\{--(.+?)--\}\}/s', '', $code);
 
         // 2. Escaped output {{ $var }}
-        $code = preg_replace('/\{\{\s*(.+?)\s*\}\}/', '<?php echo e($1 ?? ""); ?>', $code);
+        $code = preg_replace('/\{\{\s*(.+?)\s*\}\}/s', '<?php echo e($1 ?? ""); ?>', $code);
 
         // 3. Raw output {!! $var !!}
-        $code = preg_replace('/\{!!\s*(.+?)\s*!!\}/', '<?php echo $1 ?? ""; ?>', $code);
+        $code = preg_replace('/\{!!\s*(.+?)\s*!!\}/s', '<?php echo $1 ?? ""; ?>', $code);
 
         // 4. Control Structures
         $directives = [
@@ -97,8 +97,9 @@ class View
             '/@endguest/' => '<?php endif; ?>',
             '/@foreach\s*\((.*)\)/' => '<?php foreach($1): ?>',
             '/@endforeach/' => '<?php endforeach; ?>',
-            '/@forelse\s*\((.*)\)/' => '<?php if(empty($1)): ?>', // Simplified, actual forelse is harder
-            '/@empty/' => '<?php endif; ?>', // Not exactly real @forelse logic but close
+            '/@forelse\s*\(\s*(.+?)\s+as\s+(.+?)\s*\)/' => '<?php if(isset($1) && count($1) > 0): foreach($1 as $2): ?>',
+            '/@empty/' => '<?php endforeach; else: ?>',
+            '/@endforelse/' => '<?php endif; ?>',
             '/@php/' => '<?php ',
             '/@endphp/' => ' ?>',
         ];

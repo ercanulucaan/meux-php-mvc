@@ -97,3 +97,42 @@ if (!function_exists('redirect')) {
         exit;
     }
 }
+
+if (!function_exists('back')) {
+    function back()
+    {
+        return \Core\Response::back();
+    }
+}
+
+if (!function_exists('request')) {
+    function request()
+    {
+        return new \Core\Request;
+    }
+}
+
+if (!function_exists('session')) {
+    function session()
+    {
+        return new \Core\Session;
+    }
+}
+
+if (!function_exists('hasFlash')) {
+    function hasFlash($key)
+    {
+        return \Core\Session::hasFlash($key);
+    }
+}
+
+if (!function_exists('flash')) {
+    function flash($key, $value = null)
+    {
+        if ($value !== null) {
+            \Core\Session::flash($key, $value);
+        } else {
+            return \Core\Session::getFlash($key);
+        }
+    }
+}

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- File Picker CSS -->
     <link rel="stylesheet" href="{{ url('public/css/filepicker.css') }}">
-    @yields('styles')
+    @yield('styles')
 </head>
 
 <body class="bg-slate-50 text-slate-900 antialiased font-['Inter']">
@@ -27,17 +27,18 @@
 
             <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
                 <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium shadow-lg shadow-blue-500/20">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->is('admin/dashboard') ? 'bg-white/10 text-white shadow-lg shadow-blue-500/20' : 'hover:bg-white/5 hover:text-white' }} transition-all group">
+                    <svg class="w-5 h-5 {{ request()->is('admin/dashboard') ? 'text-blue-400' : 'group-hover:text-blue-400' }} transition-colors"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                     <span>Dashboard</span>
                 </a>
-                <a href="#"
-                    class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
-                    <svg class="w-5 h-5 group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
+                <a href="{{ route('admin.users') }}"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->is('admin/users*') ? 'bg-white/10 text-white shadow-lg shadow-blue-500/20' : 'hover:bg-white/5 hover:text-white' }} transition-all group">
+                    <svg class="w-5 h-5 {{ request()->is('admin/users*') ? 'text-blue-400' : 'group-hover:text-blue-400' }} transition-colors"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
                         </path>
@@ -79,7 +80,7 @@
                 <div class="flex items-center space-x-4">
                     <div class="h-8 w-px bg-slate-200 hidden md:block"></div>
                     <span class="text-slate-500 font-medium">Hoş geldin, <span class="text-slate-900">{{
-                            \Core\Session::get('user_name') }}</span></span>
+                            session()->get('user_name') }}</span></span>
                 </div>
 
                 <div class="flex items-center space-x-4">

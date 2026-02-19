@@ -57,7 +57,24 @@ class Request
      */
     public static function uri()
     {
-        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $basePath = parse_url(config('app.base_url', ''), PHP_URL_PATH);
+
+        if ($basePath && strpos($uri, $basePath) === 0) {
+            $uri = substr($uri, strlen($basePath));
+        }
+
+        return '/' . ltrim($uri, '/');
+    }
+
+    /**
+     * Mevcut URI'nin belirli bir desene uyup uymadığını kontrol eder.
+     */
+    public static function is($pattern)
+    {
+        $uri = static::uri();
+        $pattern = str_replace(['*', '/'], ['.*', '\/'], ltrim($pattern, '/'));
+        return preg_match('/^' . $pattern . '$/', ltrim($uri, '/'));
     }
 
     /**

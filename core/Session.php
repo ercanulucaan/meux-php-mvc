@@ -66,6 +66,14 @@ class Session
     }
 
     /**
+     * Flash var mı?
+     */
+    public static function hasFlash($key)
+    {
+        return isset($_SESSION['_flash'][$key]);
+    }
+
+    /**
      * Tek seferlik mesajı getirir ve siler.
      */
     public static function getFlash($key, $default = null)
